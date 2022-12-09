@@ -1,0 +1,163 @@
+@import 'styles/global';
+
+.h1 {
+  font-weight: bold;
+  font-size: 1.75rem;
+  line-height: 1.21;
+  @include breakpoint('lg') {
+    font-size: 2.125rem;
+    line-height: 1.29;
+  }
+}
+
+.h2 {
+  font-weight: bold;
+  font-size: 1.625rem;
+  line-height: 1.23;
+  @include breakpoint('lg') {
+    font-size: 2rem;
+    line-height: 1.25;
+  }
+}
+
+.h3 {
+  font-weight: bold;
+  font-size: 1.4375rem;
+  line-height: 1.3;
+  @include breakpoint('lg') {
+    font-size: 1.6875rem;
+    line-height: 1.41;
+  }
+}
+
+.h4 {
+  font-weight: bold;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  @include breakpoint('lg') {
+    font-size: 1.5rem;
+    line-height: 1.33;
+  }
+}
+
+.h5 {
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 1.33;
+  @include breakpoint('lg') {
+    font-size: 1.3125rem;
+    line-height: 1.33;
+  }
+}
+
+.h6 {
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.38;
+  @include breakpoint('lg') {
+    font-size: 1.1875rem;
+    line-height: 1.42;
+  }
+}
+
+.display-sm {
+  font-weight: bold;
+  font-size: 1.625rem;
+  line-height: 1.23;
+  @include breakpoint('lg') {
+    font-size: 2.75rem;
+    line-height: 0.91;
+  }
+}
+
+.display-md {
+  font-weight: bold;
+  font-size: 2.125rem;
+  line-height: 1.18;
+  @include breakpoint('lg') {
+    font-size: 3.375rem;
+    line-height: 1.24;
+  }
+}
+
+.link-sm {
+  font-family: $font-family-secondary;
+  font-weight: bold;
+  font-size: 0.8125rem;
+  line-height: 1.31;
+}
+
+.link-md {
+  font-family: $font-family-secondary;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.link-lg {
+  font-family: $font-family-secondary;
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 1.44;
+}
+
+.button {
+  font-family: $font-family-secondary;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  line-height: 1.14;
+}
+
+.menu-sm {
+  font-family: $font-family-secondary;
+  font-weight: bold;
+  font-size: 0.8125rem;
+  line-height: 1.23;
+}
+
+.menu-md {
+  font-family: $font-family-secondary;
+  font-weight: bold;
+  font-size: 0.9375rem;
+  line-height: 1.73;
+}
+
+.blockquote-sm {
+  font-family: $font-family-secondary;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.blockquote-md {
+  font-family: $font-family-secondary;
+  font-weight: bold;
+  font-size: 2.125rem;
+  line-height: 1.09;
+}
+
+.p-sm {
+  font-family: $font-family-secondary;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.09;
+}
+
+.p-md {
+  font-family: $font-family-secondary;
+  font-size: 0.8125rem;
+  line-height: 1.31;
+}
+
+.p-lg {
+  font-family: $font-family-secondary;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.p-xl {
+  font-family: $font-family-secondary;
+  font-size: 1.125rem;
+  line-height: 1.44;
+}

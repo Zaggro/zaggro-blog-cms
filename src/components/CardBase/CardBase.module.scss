@@ -1,0 +1,97 @@
+@import 'styles/global';
+
+$circleImageSize: 4.875rem;
+$halfCircleImageSize: $circleImageSize / 2;
+
+.root {
+  display: flex;
+  width: 100%;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  position: relative;
+  border-style: solid;
+  border-width: 2px;
+  border-image-source: linear-gradient(
+    129deg,
+    #72ffff 17%,
+    rgba(56, 201, 255, 0) 34%,
+    rgba(26, 174, 255, 0) 72%,
+    #0096ff 89%
+  );
+  border-image-slice: 1;
+  background-color: rgba(56, 224, 224, 0.15);
+
+  &.secondary {
+    box-shadow: inset 0 0 3px 1px rgba(255, 255, 255, 0.2);
+    border-width: 1px;
+    border-image-source: linear-gradient(
+      142deg,
+      #72ffff 12%,
+      rgba(56, 201, 255, 0) 30%,
+      rgba(26, 174, 255, 0) 73%,
+      #0096ff 92%
+    );
+    background-color: rgba(45, 26, 81, 0.7);
+
+    .blurBorder {
+      border-image-source: linear-gradient(
+        142deg,
+        #72ffff 12%,
+        rgba(57, 202, 255, 0) 52%,
+        #0096ff 92%
+      );
+    }
+  }
+
+  &.withIcon {
+    margin-top: $halfCircleImageSize;
+    padding-top: $halfCircleImageSize;
+  }
+
+  &.withComingSoon {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+  }
+}
+
+.blurBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-filter: blur(10px);
+  filter: blur(10px);
+  border-style: solid;
+  border-width: 5px;
+  border-image-source: linear-gradient(
+    126deg,
+    #72ffff 18%,
+    rgba(57, 202, 255, 0) 53%,
+    #0096ff 89%
+  );
+  border-image-slice: 1;
+  z-index: -1;
+}
+
+.iconContainer {
+  position: absolute;
+  top: -$halfCircleImageSize;
+  left: 1rem + $halfCircleImageSize;
+  transform: translateX(-50%);
+  width: 4.875rem;
+  height: 4.875rem;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.comingSoon {
+  position: absolute;
+  top: -0.75rem;
+  left: 1rem;
+}

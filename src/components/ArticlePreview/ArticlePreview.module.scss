@@ -1,0 +1,72 @@
+@import 'styles/global';
+
+.root {
+  width: fit-content;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+$widthMobile: 22.375rem;
+$widthDesktop: 27rem;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: $widthMobile;
+  @include breakpoint('lg') {
+    width: $widthDesktop;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.category {
+  position: absolute;
+  bottom: -0.25rem;
+  left: 1.25rem;
+}
+
+.image {
+  width: $widthMobile + 0.25rem;
+  height: 12.9375rem;
+  object-fit: cover;
+  max-width: none;
+  // Hide borders
+  margin-left: -0.125rem;
+  margin-top: -0.125rem;
+  @include breakpoint('lg') {
+    width: $widthDesktop + 0.25rem;
+    height: 15.625rem;
+  }
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 1rem 1rem 1rem;
+  height: 100%;
+  @include breakpoint('lg') {
+    padding: 0 1.25rem 1.25rem 1.25rem;
+  }
+}
+
+.bottomDetails {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.detailsText {
+  font-family: DMSans;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #c0b6d2;
+}
