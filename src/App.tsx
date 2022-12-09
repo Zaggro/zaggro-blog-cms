@@ -1,14 +1,12 @@
-import './App.css';
+import './App.css'
 import { BrowserRouter } from 'react-router-dom'
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
-        App
-      </div>
+      <div className="App">App</div>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
