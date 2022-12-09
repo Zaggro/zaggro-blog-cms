@@ -5,7 +5,7 @@ import {
   Timestamp,
   doc,
   setDoc,
-  addDoc
+  addDoc,
 } from 'firebase/firestore'
 import slug from 'slug'
 import { firestore } from './firebase'
@@ -15,7 +15,7 @@ export interface ArticleFirestoreDoc {
   content: string
   active: boolean
   date: Timestamp
-  imageURL: string
+  imageUrl: string
   category: string
   deleted?: boolean
   description: string
@@ -26,7 +26,7 @@ export interface Article {
   title: string
   content: string
   date: string
-  imageURL: string
+  imageUrl: string
   category: string
   active: boolean
   id: string
@@ -49,10 +49,10 @@ export async function getAllArticles() {
           title: articleData.title,
           content: articleData.content,
           date: articleData.date.toDate().toISOString().slice(0, 10),
-          imageURL: articleData.imageURL,
+          imageUrl: articleData.imageUrl,
           category: articleData.category,
           description: articleData.description,
-          id: doc.id
+          id: doc.id,
         })
       }
     })
@@ -73,6 +73,7 @@ export async function createArticle(article: ArticleFirestoreDoc) {
   return addDoc(collection(firestore, 'articles'), article)
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function updateArticle(id: string, fields: any) {
   const docRef = doc(firestore, 'articles', id)
   return setDoc(docRef, fields, { merge: true })
