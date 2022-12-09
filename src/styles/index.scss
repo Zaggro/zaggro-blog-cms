@@ -1,0 +1,10 @@
+@import './reset';
+@import './variables';
+@import './fonts';
+
+body {
+  font-family: $font-family-primary;
+  font-weight: 400;
+  color: white;
+  background-color: #2d1a51;
+}
