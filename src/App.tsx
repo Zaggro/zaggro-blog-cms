@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import { auth } from 'firestore/firebase'
 import List from 'views/List/List'
 import Login from 'views/Login/Login'
+import Edit from 'views/Edit/Edit'
 import styles from './App.module.scss'
 
 function App() {
@@ -17,9 +18,8 @@ function App() {
   return (
     <div className={styles.root}>
       <Routes>
-        {/* <Route path="/articles/:id/edit" element={<Edit />} />
-        <Route path="/articles/:id/preview" element={<Preview />} />
-        */}
+        {/*<Route path="/articles/:id/preview" element={<Preview />} />*/}
+        <Route path="/articles/:id/edit" element={<Edit />} />
         <Route path="/articles" element={<List />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Navigate replace to="login" />} />

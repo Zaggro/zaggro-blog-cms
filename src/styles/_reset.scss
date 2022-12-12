@@ -8,7 +8,7 @@
     - The "symbol *" part is to solve Firefox SVG sprite bug
  */
 *:where(
-    :not(html, iframe, canvas, img, svg, video, audio, input):not(
+    :not(html, iframe, canvas, img, svg, video, audio, input, textarea):not(
         svg *,
         symbol *
       )
@@ -32,6 +32,10 @@ button {
 
 button:disabled {
   cursor: not-allowed;
+}
+
+textarea {
+  resize: vertical;
 }
 
 /* Remove list styles (bullets/numbers) */

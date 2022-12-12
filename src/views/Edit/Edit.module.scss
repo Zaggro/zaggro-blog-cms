@@ -1,0 +1,143 @@
+@import 'styles/global';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  font-size: 1.3rem;
+  @include breakpoint('lg') {
+    padding: 3rem;
+  }
+}
+
+.header {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.backToList {
+  font-size: 1.2rem;
+  text-align: left;
+  transition: all 0.3s ease;
+  &:hover {
+    color: #0096ff;
+  }
+}
+
+.title {
+  font-size: 3rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+  &:hover {
+    color: #0096ff;
+  }
+}
+
+.saveChanges {
+  width: fit-content;
+  margin: 0 auto 3rem auto;
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 48.75rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+
+.uploadImageSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.editorjs {
+  font-size: 1rem;
+  line-height: 1.875rem;
+  background-color: white;
+  color: black;
+  padding: 1rem;
+  margin-bottom: 2rem;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 0.5625rem;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    line-height: 3.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    line-height: 2.25rem;
+  }
+
+  h3 {
+    font-size: 1.125rem;
+    line-height: 1.875rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+    line-height: 1.875rem;
+  }
+
+  h5 {
+    font-size: 0.875rem;
+    line-height: 1.75rem;
+  }
+
+  h6 {
+    font-size: 0.8125rem;
+    line-height: 1.625rem;
+  }
+
+  .ce-block {
+    padding: 0.375rem 0;
+  }
+
+  .tc-cell {
+    padding: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.875rem;
+  }
+
+  table {
+    font-size: 1rem;
+    line-height: 1.875rem;
+  }
+
+  table a {
+    text-decoration-line: underline;
+  }
+
+  th,
+  td {
+    padding: 1.5rem;
+    border-width: 0.0625rem;
+    border-color: rgb(255 255 255);
+  }
+}
