@@ -29,6 +29,7 @@ function ArticlePreview() {
         <Link to="/articles" className={styles.backToList}>
           &larr; Back to List
         </Link>
+        <h1 className={styles.title}>Article Preview</h1>
         <ArticlePage {...article} />
       </div>
     </>

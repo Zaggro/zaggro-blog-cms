@@ -25,15 +25,13 @@
 }
 
 .title {
-  font-size: 3rem;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: all 0.3s ease;
-  &:hover {
-    color: #0096ff;
-  }
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: 0.075rem;
 }
 
 .saveChanges {
@@ -44,7 +42,7 @@
 .editor {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem;
   max-width: 48.75rem;
   width: 100%;
   margin: 0 auto;
@@ -76,6 +74,7 @@
 .editorjs {
   padding-top: 1.5rem;
   border-radius: 0.5rem;
+  margin-bottom: 1.875rem;
   background: white;
   color: black;
   [class*='ce-paragraph'],
@@ -92,9 +91,18 @@
   [class*='ce-paragraph'],
   table,
   ul,
-  ol {
+  ol,
+  figure,
+  img {
     margin-bottom: 1.875rem;
-    padding: 0;
+  }
+
+  figure img {
+    margin-bottom: 0;
+  }
+
+  img {
+    border-radius: 0.375rem;
   }
 
   [class*='ce-paragraph'],
@@ -103,13 +111,12 @@
   ol,
   a,
   li {
-    font-family: 'DMSans';
+    font-family: $font-family-secondary;
     font-size: 1rem;
     line-height: 1.5;
-    padding: 0;
   }
 
-  p {
+  [class*='ce-paragraph'] {
     font-size: 1rem;
     line-height: 1.5;
   }
@@ -190,6 +197,10 @@
     font-style: italic;
   }
 
+  ol,
+  ul {
+    padding-left: 1rem;
+  }
   ol {
     list-style: decimal;
   }
@@ -204,12 +215,11 @@
 
   table {
     width: 100%;
-    margin: 1rem 0;
 
     td {
       border-style: solid;
       border-width: 1px;
-      border-color: #0096ff;
+      border-color: #715f92;
       padding: 0.5rem;
     }
   }
