@@ -18,7 +18,6 @@ import Table from '@editorjs/table'
 import styles from './Edit.module.scss'
 import Button from 'components/Button/Button'
 
-// TODO: fix image upload
 function ArticlePage() {
   const { id } = useParams()
 
@@ -27,6 +26,7 @@ function ArticlePage() {
   const [category, setCategory] = useState('')
   const [description, setDescription] = useState('')
   const [imageUrl, setImageUrl] = useState('')
+  const [readLength, setReadLength] = useState<number | null>(null)
 
   const uploadToFirestore = async (file: File) => {
     const storageRef = ref(storage, `blog/${file.name}-${id}`)
@@ -108,6 +108,7 @@ function ArticlePage() {
         setCategory(doc.category)
         setDescription(doc.description)
         setImageUrl(doc.imageUrl)
+        setReadLength(doc.readLength)
         setEditorData(data)
         initEditor(data)
       }
@@ -126,6 +127,7 @@ function ArticlePage() {
           imageUrl,
           description,
           category,
+          readLength,
         })
       } catch (error) {
         toast.error('Could not save the article')
@@ -168,6 +170,16 @@ function ArticlePage() {
             type="text"
             value={date}
             onChange={(e) => setDate(e.target.value)}
+          />
+        </label>
+        <label className={styles.label} htmlFor="readLength">
+          How long to read this article in minutes
+          <input
+            className={styles.input}
+            id="readLength"
+            type="number"
+            value={readLength ?? undefined}
+            onChange={(e) => setReadLength(e.target.valueAsNumber)}
           />
         </label>
         <label className={styles.label} htmlFor="category">

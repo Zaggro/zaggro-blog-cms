@@ -23,18 +23,15 @@
 
 .title {
   text-align: center;
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 600;
   letter-spacing: 0.075rem;
+  margin-bottom: 1rem;
 }
 
 .addNew {
-  font-size: 1.2rem;
-  text-align: center;
-  transition: all 0.3s ease;
-  &:hover {
-    color: #0096ff;
-  }
+  width: fit-content;
+  margin: auto;
 }
 
 .articles {
@@ -45,6 +42,15 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 1.5rem;
+}
+
+.articleContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.article {
+  flex-grow: 1;
 }
 
 .controlsContainer {
@@ -61,12 +67,17 @@
   border-bottom: 2px solid #0096ff;
   font-weight: 600;
   letter-spacing: 0.0625rem;
+  color: #f1c40f;
+
+  &.published {
+    color: #07bc0c;
+  }
 }
 
 .controls {
   display: flex;
   justify-content: space-between;
-  gap: 8px;
+  gap: 0.5rem;
 
   a,
   button {
