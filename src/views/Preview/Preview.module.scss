@@ -1,0 +1,22 @@
+@import 'styles/global';
+
+.root {
+  position: relative;
+  padding: 8.75rem 0.5rem 3.125rem 0.5rem;
+  @include breakpoint('lg') {
+    padding: 15.75rem 1rem 6.25rem 1rem;
+  }
+}
+
+.backToList {
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  display: block;
+  font-size: 1.2rem;
+  text-align: left;
+  transition: all 0.3s ease;
+  &:hover {
+    color: #0096ff;
+  }
+}
