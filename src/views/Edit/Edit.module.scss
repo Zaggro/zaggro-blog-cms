@@ -61,6 +61,12 @@
   padding: 0.5rem;
 }
 
+.description {
+  font-family: 'Poppins';
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+
 .uploadImageSection {
   display: flex;
   flex-direction: column;
@@ -68,76 +74,143 @@
 }
 
 .editorjs {
-  font-size: 1rem;
-  line-height: 1.875rem;
-  background-color: white;
+  padding-top: 1.5rem;
+  border-radius: 0.5rem;
+  background: white;
   color: black;
-  padding: 1rem;
-  margin-bottom: 2rem;
+  [class*='ce-paragraph'],
+  [class*='cdx-block'] {
+    padding: 0;
+  }
 
   h1,
   h2,
   h3,
   h4,
   h5,
-  h6 {
-    margin-top: 0.5625rem;
-    margin-bottom: 0.75rem;
+  h6,
+  [class*='ce-paragraph'],
+  table,
+  ul,
+  ol {
+    margin-bottom: 1.875rem;
+    padding: 0;
+  }
+
+  [class*='ce-paragraph'],
+  table,
+  ul,
+  ol,
+  a,
+  li {
+    font-family: 'DMSans';
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
   h1 {
-    font-size: 2.5rem;
-    line-height: 3.5rem;
+    font-weight: bold;
+    font-size: 1.75rem;
+    line-height: 1.21;
+    @include breakpoint('lg') {
+      font-size: 2.125rem;
+      line-height: 1.29;
+    }
   }
 
   h2 {
-    font-size: 1.5rem;
-    line-height: 2.25rem;
+    font-weight: bold;
+    font-size: 1.625rem;
+    line-height: 1.23;
+    @include breakpoint('lg') {
+      font-size: 2rem;
+      line-height: 1.25;
+    }
   }
 
   h3 {
-    font-size: 1.125rem;
-    line-height: 1.875rem;
+    font-weight: bold;
+    font-size: 1.4375rem;
+    line-height: 1.3;
+    @include breakpoint('lg') {
+      font-size: 1.6875rem;
+      line-height: 1.41;
+    }
   }
 
   h4 {
-    font-size: 1rem;
-    line-height: 1.875rem;
+    font-weight: bold;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    @include breakpoint('lg') {
+      font-size: 1.5rem;
+      line-height: 1.33;
+    }
   }
 
   h5 {
-    font-size: 0.875rem;
-    line-height: 1.75rem;
+    font-weight: bold;
+    font-size: 1.125rem;
+    line-height: 1.33;
+    @include breakpoint('lg') {
+      font-size: 1.3125rem;
+      line-height: 1.33;
+    }
   }
 
   h6 {
-    font-size: 0.8125rem;
-    line-height: 1.625rem;
-  }
-
-  .ce-block {
-    padding: 0.375rem 0;
-  }
-
-  .tc-cell {
-    padding: 1.5rem;
+    font-weight: bold;
     font-size: 1rem;
-    line-height: 1.875rem;
+    line-height: 1.38;
+    @include breakpoint('lg') {
+      font-size: 1.1875rem;
+      line-height: 1.42;
+    }
+  }
+
+  a {
+    font-weight: bold;
+    color: #0096ff;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  b {
+    font-weight: bold;
+  }
+
+  i {
+    font-style: italic;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  li::marker {
+    color: #0096ff;
   }
 
   table {
-    font-size: 1rem;
-    line-height: 1.875rem;
-  }
+    width: 100%;
+    margin: 1rem 0;
 
-  table a {
-    text-decoration-line: underline;
-  }
-
-  th,
-  td {
-    padding: 1.5rem;
-    border-width: 0.0625rem;
-    border-color: rgb(255 255 255);
+    td {
+      border-style: solid;
+      border-width: 1px;
+      border-color: #0096ff;
+      padding: 0.5rem;
+    }
   }
 }

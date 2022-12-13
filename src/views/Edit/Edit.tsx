@@ -183,6 +183,7 @@ function ArticlePage() {
         <label className={styles.label} htmlFor="description">
           Description
           <textarea
+            className={styles.description}
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
