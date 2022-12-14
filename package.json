@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.0.0",
     "@editorjs/editorjs": "^2.26.2",
     "@editorjs/header": "^2.7.0",
     "@editorjs/image": "^2.7.1",
@@ -27,12 +28,13 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "next lint",
-    "prettier": "npx prettier --write ."
+    "start": "craco start",
+    "build": "craco build",
+    "build:staging": "env-cmd -f .env.staging craco build",
+    "build:production": "yarn build",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "prettier": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [

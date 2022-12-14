@@ -1,0 +1,80 @@
+name: CI
+on: push
+
+env:
+  DOCKER_PKG: ghcr.io/zaggro/zaggro-blog-cms/web
+  DEPLOYMENT_NAME: zaggro-panel
+  ZAGENV: staging
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Docker Login
+        env:
+          DOCKER_USERNAME: ${{ secrets.REPO_USER }}
+          DOCKER_PASSWORD: ${{ secrets.REPO_TOKEN }}
+        run: docker login ghcr.io -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+      - name: Add the token for NPM private packages
+        env:
+          NPM_TOKEN: ${{ secrets.REPO_TOKEN }}
+        run: echo "//npm.pkg.github.com/:_authToken=${{ env.NPM_TOKEN }}" > npmtoken
+
+      - name: Pull latest images for Docker cache
+        run: |
+          docker pull $DOCKER_PKG:latest || true
+
+      - name: Identify build tag
+        run: echo "TAG=$(echo $GITHUB_SHA | head -c7)" >> $GITHUB_ENV
+
+      - name: Build main Docker image
+        run: |
+          docker build \
+          --cache-from $DOCKER_PKG:${{ env.ZAGENV }}-latest \
+          --build-arg ZAGENV=${{ env.ZAGENV }} \
+          -t $DOCKER_PKG:${{ env.ZAGENV }}-${{ env.TAG }} .
+
+      - name: Tag with latest environment
+        if: github.ref == 'refs/heads/main'
+        run: |
+          docker tag $DOCKER_PKG:${{ env.ZAGENV }}-${{ env.TAG }} $DOCKER_PKG:${{ env.ZAGENV }}-latest
+
+      - name: Push images to Github Packages
+        run: |
+          docker push -a $DOCKER_PKG
+
+  deploy:
+    name: Trigger deployment
+    needs: [build]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Identify build tag
+        run: echo "TAG=$(echo $GITHUB_SHA | head -c7)" >> $GITHUB_ENV
+
+      - name: Trigger deployment
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.REPO_TOKEN }}
+          repository: actafi/kubernetes-dev
+          event-type: Deploy service
+          client-payload: >-
+            {
+              "deployment_name": "${{ env.DEPLOYMENT_NAME }}",
+              "github_repository": "${{ github.repository }}",
+              "acta_env": "${{ env.ZAGENV }}",
+              "docker_pkg": "${{ env.DOCKER_PKG }}",
+              "tag": "${{ env.TAG }}",
+              "actor": "${{ github.actor }}",
+              "namespace": "web"
+            }

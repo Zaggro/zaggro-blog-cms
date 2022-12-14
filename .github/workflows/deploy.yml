@@ -1,0 +1,106 @@
+name: Deploy
+on:
+  workflow_dispatch:
+    inputs:
+      zagenv:
+        description: 'Environment (staging / production)'
+        required: true
+        default: 'production'
+      tag:
+        description: 'Docker tag (defaults to main)'
+        required: false
+
+env:
+  DOCKER_PKG: ghcr.io/zaggro/zaggro-blog-cms/web
+  DEPLOYMENT_NAME: zaggro-panel
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Validate selected tag
+        run: |
+          if [ "${{ github.event.inputs.tag }}" = "" ]; then
+            echo "TAG=$(echo $GITHUB_SHA | head -c7)" >> $GITHUB_ENV
+          else
+            echo "TAG=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Checkout specified tag
+        run: git checkout ${{ env.TAG }}
+
+      - name: Docker Login
+        env:
+          DOCKER_USERNAME: ${{ secrets.REPO_USER }}
+          DOCKER_PASSWORD: ${{ secrets.REPO_TOKEN }}
+        run: docker login ghcr.io -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+      - name: Add the token for NPM private packages
+        env:
+          NPM_TOKEN: ${{ secrets.REPO_TOKEN }}
+        run: echo "//npm.pkg.github.com/:_authToken=${{ env.NPM_TOKEN }}" > npmtoken
+
+      - name: Pull latest images for Docker cache
+        run: |
+          docker pull $DOCKER_PKG:${{ env.TAG }}-latest || true
+
+      - name: Build main Docker image
+        run: |
+          docker build \
+          --cache-from $DOCKER_PKG:${{ github.event.inputs.tag }}-latest \
+          --build-arg ZAGENV=${{ github.event.inputs.zagenv }} \
+          -t $DOCKER_PKG:${{ github.event.inputs.zagenv }}-${{ env.TAG }} .
+
+      - name: Tag with latest environment
+        run: |
+          docker tag $DOCKER_PKG:${{ github.event.inputs.zagenv }}-${{ env.TAG }} $DOCKER_PKG:${{ github.event.inputs.zagenv }}-latest
+
+      - name: Push images to Github Packages
+        run: |
+          docker push -a $DOCKER_PKG
+
+      - name: Trigger deployment to dev cluster
+        uses: peter-evans/repository-dispatch@v1
+        if: github.event.inputs.zagenv == 'staging'
+        with:
+          token: ${{ secrets.REPO_TOKEN }}
+          repository: actafi/kubernetes-dev
+          event-type: Deploy service
+          client-payload: >-
+            {
+              "deployment_name": "${{ env.DEPLOYMENT_NAME }}",
+              "github_repository": "${{ github.repository }}",
+              "acta_env": "${{ github.event.inputs.zagenv }}",
+              "docker_pkg": "${{ env.DOCKER_PKG }}",
+              "tag": "${{ env.TAG }}",
+              "actor": "${{ github.actor }}",
+              "namespace": "web"
+            }
+
+      - name: Trigger deployment to prod cluster
+        uses: peter-evans/repository-dispatch@v1
+        if: github.event.inputs.zagenv == 'production'
+        with:
+          token: ${{ secrets.REPO_TOKEN }}
+          repository: actafi/kubernetes-prod
+          event-type: Deploy service
+          client-payload: >-
+            {
+              "deployment_name": "${{ env.DEPLOYMENT_NAME }}",
+              "github_repository": "${{ github.repository }}",
+              "acta_env": "${{ github.event.inputs.zagenv }}",
+              "docker_pkg": "${{ env.DOCKER_PKG }}",
+              "tag": "${{ env.TAG }}",
+              "actor": "${{ github.actor }}",
+              "namespace": "web"
+            }
