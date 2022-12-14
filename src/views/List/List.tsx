@@ -15,6 +15,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import ArticlePreview from 'components/ArticlePreview/ArticlePreview'
 import styles from './List.module.scss'
+import Button from 'components/Button/Button'
 
 function List() {
   const [refresh, setRefresh] = useState(false)
@@ -59,6 +60,7 @@ function List() {
       date: Timestamp.now(),
       imageUrl: '',
       category: '',
+      readLength: null,
     })
     navigate(`/articles/${docRef.id}/edit`)
   }
@@ -75,21 +77,30 @@ function List() {
         Logout
       </button>
       <h1 className={styles.title}>Articles</h1>
-      <button className={styles.addNew} type="button" onClick={addArticle}>
+      <Button onClick={addArticle} className={styles.addNew}>
         + Add New
-      </button>
+      </Button>
       <div className={styles.articles}>
         {articles.map(
-          ({ id, title, date, imageUrl, active, category }: Article) => {
+          ({
+            id,
+            title,
+            date,
+            imageUrl,
+            active,
+            category,
+            readLength,
+          }: Article) => {
             return (
-              <div key={id}>
+              <div key={id} className={styles.articleContainer}>
                 <ArticlePreview
                   imageUrl={imageUrl}
                   articleUrl=""
                   title={title}
                   category={category}
                   dateCreated={date}
-                  readLength={''}
+                  readLength={readLength}
+                  className={styles.article}
                 />
                 <div className={styles.controlsContainer}>
                   <div

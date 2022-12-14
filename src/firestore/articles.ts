@@ -16,6 +16,7 @@ export interface ArticleFirestoreDoc {
   active: boolean
   date: Timestamp
   imageUrl: string
+  readLength: number | null
   category: string
   deleted?: boolean
   description: string
@@ -27,6 +28,7 @@ export interface Article {
   content: string
   date: string
   imageUrl: string
+  readLength: number | null
   category: string
   active: boolean
   id: string
@@ -53,6 +55,7 @@ export async function getAllArticles() {
           category: articleData.category,
           description: articleData.description,
           id: doc.id,
+          readLength: articleData.readLength,
         })
       }
     })

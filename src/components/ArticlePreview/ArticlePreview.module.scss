@@ -2,11 +2,6 @@
 
 .root {
   width: fit-content;
-  transition: all 0.3s ease-in-out;
-
-  &:hover {
-    transform: scale(1.01);
-  }
 }
 
 $widthMobile: 22.375rem;
@@ -65,8 +60,15 @@ $widthDesktop: 27rem;
 }
 
 .detailsText {
+  display: flex;
+  align-items: center;
+  gap: 0.5625rem;
   font-family: DMSans;
   font-size: 1rem;
   line-height: 1.5;
   color: #c0b6d2;
+}
+
+.clock {
+  fill: #c0b6d2;
 }
