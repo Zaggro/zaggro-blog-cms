@@ -26,7 +26,7 @@ function ArticlePage() {
   const [category, setCategory] = useState('')
   const [description, setDescription] = useState('')
   const [imageUrl, setImageUrl] = useState('')
-  const [readLength, setReadLength] = useState<number | null>(null)
+  const [readLength, setReadLength] = useState('')
 
   const uploadToFirestore = async (file: File) => {
     const storageRef = ref(storage, `blog/${file.name}-${id}`)
@@ -179,7 +179,7 @@ function ArticlePage() {
             id="readLength"
             type="number"
             value={readLength ?? undefined}
-            onChange={(e) => setReadLength(e.target.valueAsNumber)}
+            onChange={(e) => setReadLength(e.target.value)}
           />
         </label>
         <label className={styles.label} htmlFor="category">

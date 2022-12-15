@@ -60,7 +60,7 @@ function List() {
       date: Timestamp.now(),
       imageUrl: '',
       category: '',
-      readLength: null,
+      readLength: '',
     })
     navigate(`/articles/${docRef.id}/edit`)
   }

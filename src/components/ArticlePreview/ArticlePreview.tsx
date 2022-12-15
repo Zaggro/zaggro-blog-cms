@@ -12,7 +12,7 @@ export interface ArticlePreviewProps {
   title: string
   category: string
   dateCreated: string
-  readLength: number | null
+  readLength: string
   className?: string
 }
 
